@@ -2546,6 +2546,7 @@ export class GetCurrentLoginInformationsOutput implements IGetCurrentLoginInform
     application: ApplicationInfoDto;
     user: UserLoginInfoDto;
     tenant: TenantLoginInfoDto;
+    employeeId: string | undefined;
 
     constructor(data?: IGetCurrentLoginInformationsOutput) {
         if (data) {
@@ -2561,6 +2562,7 @@ export class GetCurrentLoginInformationsOutput implements IGetCurrentLoginInform
             this.application = _data["application"] ? ApplicationInfoDto.fromJS(_data["application"]) : <any>undefined;
             this.user = _data["user"] ? UserLoginInfoDto.fromJS(_data["user"]) : <any>undefined;
             this.tenant = _data["tenant"] ? TenantLoginInfoDto.fromJS(_data["tenant"]) : <any>undefined;
+            this.employeeId = _data["employeeId"] || undefined;
         }
     }
 
@@ -2576,6 +2578,7 @@ export class GetCurrentLoginInformationsOutput implements IGetCurrentLoginInform
         data["application"] = this.application ? this.application.toJSON() : <any>undefined;
         data["user"] = this.user ? this.user.toJSON() : <any>undefined;
         data["tenant"] = this.tenant ? this.tenant.toJSON() : <any>undefined;
+        data["employeeId"] = this.employeeId || undefined;
         return data; 
     }
 
@@ -2591,6 +2594,7 @@ export interface IGetCurrentLoginInformationsOutput {
     application: ApplicationInfoDto;
     user: UserLoginInfoDto;
     tenant: TenantLoginInfoDto;
+    employeeId: string | undefined;
 }
 
 export class GetRoleForEditOutput implements IGetRoleForEditOutput {
@@ -3721,7 +3725,7 @@ export class UserLoginInfoDto implements IUserLoginInfoDto {
     surname: string | undefined;
     userName: string | undefined;
     emailAddress: string | undefined;
-
+    roleNames!: string[] | undefined;
     constructor(data?: IUserLoginInfoDto) {
         if (data) {
             for (var property in data) {
@@ -3738,6 +3742,7 @@ export class UserLoginInfoDto implements IUserLoginInfoDto {
             this.surname = _data["surname"];
             this.userName = _data["userName"];
             this.emailAddress = _data["emailAddress"];
+            this.roleNames = _data["roleNames"];
         }
     }
 
@@ -3755,6 +3760,7 @@ export class UserLoginInfoDto implements IUserLoginInfoDto {
         data["surname"] = this.surname;
         data["userName"] = this.userName;
         data["emailAddress"] = this.emailAddress;
+        data["roleNames"] = this.roleNames;
         return data; 
     }
 

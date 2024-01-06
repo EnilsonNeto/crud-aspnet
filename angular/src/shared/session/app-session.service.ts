@@ -14,6 +14,7 @@ export class AppSessionService {
     private _user: UserLoginInfoDto;
     private _tenant: TenantLoginInfoDto;
     private _application: ApplicationInfoDto;
+    private _employeeId: string;
 
     constructor(
         private _sessionService: SessionServiceProxy,
@@ -40,6 +41,10 @@ export class AppSessionService {
         return this.tenant ? this.tenant.id : null;
     }
 
+    get employeeId(): string {
+        return this._employeeId;
+    }
+
     getShownLoginName(): string {
         const userName = this._user.userName;
         if (!this._abpMultiTenancyService.isEnabled) {
@@ -55,6 +60,7 @@ export class AppSessionService {
                 this._application = result.application;
                 this._user = result.user;
                 this._tenant = result.tenant;
+                this._employeeId = result.employeeId
 
                 resolve(true);
             }, (err) => {

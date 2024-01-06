@@ -7,20 +7,22 @@ using AspNetCrud.Sessions.Dto;
 
 namespace AspNetCrud.Sessions
 {
-    using Authorization.Roles;
+    using Abp.Domain.Repositories;
     using Authorization.Users;
-    using Employees;
+    using System;
+    using Authorization.Roles;
     using System.Linq;
+    using Employees;
 
     public class SessionAppService : AspNetCrudAppServiceBase, ISessionAppService
     {
-        private readonly IRepository<EmployeeUser, Guid> _employeeUserRepository;
         private readonly RoleManager _roleManager;
         private readonly IRepository<User, long> _userRepository;
+        private readonly IRepository<EmployeeUser, Guid> _employeeUserRepository;
 
         public SessionAppService(RoleManager roleManager,
-                         IRepository<User, long> userRepository,
-                         IRepository<EmployeeUser, Guid> employeeUserRepository)
+                                 IRepository<User, long> userRepository,
+                                 IRepository<EmployeeUser, Guid> employeeUserRepository)
         {
             _roleManager = roleManager;
             _userRepository = userRepository;
@@ -53,7 +55,6 @@ namespace AspNetCrud.Sessions
                 var employeeUser = _employeeUserRepository.FirstOrDefault(prop => prop.UserId == AbpSession.UserId.Value);
                 if (employeeUser != null && employeeUser.UserId > 0)
                     output.EmployeeId = employeeUser.EmployeeId;
-
             }
 
             return output;
