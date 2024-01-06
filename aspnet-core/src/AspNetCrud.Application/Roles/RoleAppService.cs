@@ -143,6 +143,28 @@ namespace AspNetCrud.Roles
                 GrantedPermissionNames = grantedPermissions.Select(p => p.Name).ToList()
             };
         }
+
+        private List<Permission> GetPermissionsByRoleType(string roleName)
+        {
+            switch (roleName)
+            {
+                case "Admin":
+                    return PermissionManager.GetAllPermissions(false).Where(p =>
+                        p.Name == PermissionNames.Pages_Roles ||
+                        p.Name == PermissionNames.Pages_Users ||
+                        p.Name == PermissionNames.Pages_Departaments ||
+                        p.Name == PermissionNames.Pages_Trucks ||
+                        p.Name == PermissionNames.Pages_Employees 
+
+                        ).ToList();
+                case "HumanResources":
+                    return PermissionManager.GetAllPermissions(false).Where(p =>
+                        p.Name == PermissionNames.Pages_Trucks ||
+                        p.Name == PermissionNames.Pages_Employees
+                        ).ToList();
+            }
+            return null;
+        }
     }
 }
 
