@@ -50,12 +50,9 @@ namespace AspNetCrud.Sessions
 
             if (AbpSession.UserId.HasValue)
             {
-                output.User = MapToEntityDto(_userRepository.GetAllIncluding(prop => prop.Roles).FirstOrDefault(prop => prop.Id == AbpSession.UserId.Value));
-
-                var employeeUser = _employeeUserRepository.FirstOrDefault(prop => prop.UserId == AbpSession.UserId.Value);
-                if (employeeUser != null && employeeUser.UserId > 0)
-                    output.EmployeeId = employeeUser.EmployeeId;
+                output.User = ObjectMapper.Map<UserLoginInfoDto>(await GetCurrentUserAsync());
             }
+
 
             return output;
         }

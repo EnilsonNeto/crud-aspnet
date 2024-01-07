@@ -36,7 +36,7 @@ namespace AspNetCrud
 
         protected virtual Task<Tenant> GetCurrentTenantAsync(int tenantId = 1)
         {
-            return TenantManager.GetByIdAsync(AbpSession.GetTenantId());
+            return TenantManager.GetByIdAsync(tenantId);
         }
 
         protected virtual void CheckErrors(IdentityResult identityResult)
