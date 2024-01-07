@@ -1,9 +1,6 @@
 ﻿<div class="login-box">
-  <account-header></account-header>
-  <div class="card">
-    <div *ngIf="showTenantChange()" class="card-header">
-      <tenant-change></tenant-change>
-    </div>
+  <div class="card" style="padding: 20px; border: 2px solid #084298;">
+    <account-header></account-header>
     <div class="card-body login-card-body">
       <router-outlet></router-outlet>
     </div>
@@ -11,5 +8,4 @@
       <account-languages></account-languages>
     </div>
   </div>
-  <account-footer></account-footer>
 </div>
