@@ -42,6 +42,26 @@ import { TruckComponent } from './truck/truck.component';
 import { ResourcesHumansComponent } from './resources-humans/resources-humans.component';
 import { DriverComponent } from './driver/driver.component';
 import { EmployeeComponent } from './employee/employee.component';
+import { MatIconModule } from '@angular/material/icon'
+import { MatSliderModule } from '@angular/material/slider';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { IConfig, NgxMaskModule } from 'ngx-mask';
+
+export const options: Partial<null | IConfig> | (() => Partial<IConfig>) = null;
 
 @NgModule({
   declarations: [
@@ -91,8 +111,27 @@ import { EmployeeComponent } from './employee/employee.component';
     ServiceProxyModule,
     SharedModule,
     NgxPaginationModule,
+    MatFormFieldModule,
+    MatStepperModule,
+    MatInputModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatAutocompleteModule,
+    MatCardModule,
+    MatMenuModule,
+    MatIconModule,
+    MatSelectModule,
+    NgxMaskModule.forRoot(),
+    MatRadioModule,
+    MatCheckboxModule,
+    MatTabsModule,
+    MatDialogModule,
+    MatSliderModule,
+    MatSlideToggleModule
   ],
-  providers: [],
+  providers: [ 
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+  ],
   entryComponents: [
     // tenants
     CreateTenantDialogComponent,

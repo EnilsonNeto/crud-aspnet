@@ -2971,6 +2971,7 @@ export interface IRegisterInput {
 
 export class RegisterOutput implements IRegisterOutput {
     canLogin: boolean;
+    userId: number | undefined;
 
     constructor(data?: IRegisterOutput) {
         if (data) {
@@ -2984,6 +2985,7 @@ export class RegisterOutput implements IRegisterOutput {
     init(_data?: any) {
         if (_data) {
             this.canLogin = _data["canLogin"];
+            this.userId = _data["userId"];
         }
     }
 
@@ -2997,6 +2999,7 @@ export class RegisterOutput implements IRegisterOutput {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["canLogin"] = this.canLogin;
+        data["userId"] = this.userId;
         return data; 
     }
 
