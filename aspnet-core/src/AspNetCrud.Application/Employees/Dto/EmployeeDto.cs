@@ -26,6 +26,14 @@ namespace AspNetCrud.Employees.Dto
         public string Surname { get; set; }
 
         [Required]
+        [StringLength(Employee.MaxEmailLength)]
+        public string Email { get; set; }
+
+        [Required]
+        [StringLength(Employee.MaxPhoneNumberLength)]
+        public string PhoneNumber { get; set; }
+
+        [Required]
         [StringLength(Employee.MaxAgeLength)]
         public string Age { get; set; }
 

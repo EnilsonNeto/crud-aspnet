@@ -13,7 +13,15 @@ namespace AspNetCrud.Employees.Dto
 
         [Required]
         [StringLength(Employee.MaxNameLength)]
-        public string Name { get; set; }
+        public string Name { get; set; }        
+        
+        [Required]
+        [StringLength(Employee.MaxEmailLength)]
+        public string Email { get; set; }
+
+        [Required]
+        [StringLength(Employee.MaxPhoneNumberLength)]
+        public string PhoneNumber { get; set; }
 
         [Required]
         [StringLength(Employee.MaxSurnameLength)]

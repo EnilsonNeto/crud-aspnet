@@ -1131,11 +1131,11 @@ export class TokenAuthServiceProxy {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             if (Array.isArray(resultData200)) {
@@ -1149,11 +1149,11 @@ export class TokenAuthServiceProxy {
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<ExternalLoginProviderInfoModel[]>(<any>null);
+        return _observableOf(null as any);
     }
 
     /**
@@ -3825,4 +3825,29 @@ function blobToText(blob: any): Observable<string> {
             reader.readAsText(blob);
         }
     });
+
+    function throwException(message: string, status: number, response: string, headers: { [key: string]: any; }, result?: any): Observable<any> {
+        if (result !== null && result !== undefined)
+            return _observableThrow(result);
+        else
+            return _observableThrow(new ApiException(message, status, response, headers, null));
+    }
+    
+    function blobToText(blob: any): Observable<string> {
+        return new Observable<string>((observer: any) => {
+            if (!blob) {
+                observer.next("");
+                observer.complete();
+            } else {
+                let reader = new FileReader();
+                reader.onload = event => {
+                    observer.next((<any>event.target).result);
+                    observer.complete();
+                };
+                reader.readAsText(blob);
+            }
+        });
+    }
+    
 }
+

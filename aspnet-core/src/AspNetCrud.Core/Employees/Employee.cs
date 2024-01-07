@@ -13,9 +13,11 @@ namespace AspNetCrud.Employees
     public class Employee : FullAuditedEntity<Guid>
     {
         public const int MaxNameLength = 456;
+        public const int MaxEmailLength = 456;
         public const int MaxSurnameLength = 456;
         public const int MaxAgeLength = 3;
         public const int MaxSSNLength = 24;
+        public const int MaxPhoneNumberLength = 24;
         public const int MaxRGLength = 24;
         public const int MaxCEPLength = 36;
         public const int MaxStreetLength = 1080;
@@ -33,7 +35,15 @@ namespace AspNetCrud.Employees
 
         [Required]
         [StringLength(MaxSurnameLength)]
-        public string Surname { get; set; }
+        public string Surname { get; set; }       
+        
+        [Required]
+        [StringLength(MaxEmailLength)]
+        public string Email { get; set; }      
+        
+        [Required]
+        [StringLength(MaxPhoneNumberLength)]
+        public string PhoneNumber { get; set; }
 
         [Required]
         [StringLength(MaxAgeLength)]
