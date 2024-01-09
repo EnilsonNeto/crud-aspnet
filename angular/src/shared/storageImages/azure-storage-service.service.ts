@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class AzureStorageService {
   private accountName = 'devstoreaccount1'; // Substitua com o nome da sua conta Azure Storage
   private containerName = 'imagescrud'; // Substitua com o nome do seu container no Azure Storage
-  private sas = '?sv=2023-01-03&ss=btqf&srt=sco&spr=https%2Chttp&st=2024-01-07T20%3A53%3A11Z&se=2025-06-21T20%3A53%3A00Z&sp=rwdxftlacup&sig=IivW1DiM5Zzfqn3LTJjA2Sd%2BLctNP9wffquRUu%2FDLZs%3D'; // Substitua com sua SAS (Shared Access Signature)
+  private sas = '?sv=2023-01-03&ss=btqf&srt=sco&spr=https%2Chttp&st=2024-01-09T12%3A04%3A24Z&se=2024-01-10T12%3A04%3A24Z&sp=rwdxftlacup&sig=Rx%2FEfZsYPZ%2B3CysOdfPIqkfNsgaB7omi1%2FQGBPftr%2FA%3D'; // Substitua com sua SAS (Shared Access Signature)
 
   constructor() {}
 

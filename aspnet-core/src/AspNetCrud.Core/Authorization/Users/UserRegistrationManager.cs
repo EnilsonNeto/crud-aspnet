@@ -37,32 +37,38 @@ namespace AspNetCrud.Authorization.Users
             AbpSession = NullAbpSession.Instance;
         }
 
-        public async Task<User> RegisterAsync(string name, string surname, string emailAddress, string userName, string plainPassword, bool isEmailConfirmed)
+        public async Task<User> RegisterAsync(string name, string surname, string emailAddress, string userName, string plainPassword, bool isEmailConfirmed, string role = "")
         {
-            CheckForTenant();
+            // CheckForTenant();
 
             var tenant = await GetActiveTenantAsync();
+            var roles = new List<UserRole>();
+            var user = new User();
 
-            var user = new User
+            Role userRole;
+
+            user = new User
             {
-                TenantId = tenant.Id,
+                TenantId = tenant?.Id,
                 Name = name,
                 Surname = surname,
                 EmailAddress = emailAddress,
                 IsActive = true,
                 UserName = userName,
                 IsEmailConfirmed = isEmailConfirmed,
-                Roles = new List<UserRole>()
+                Roles = roles
             };
 
             user.SetNormalizedNames();
-           
-            foreach (var defaultRole in await _roleManager.Roles.Where(r => r.IsDefault).ToListAsync())
+
+            if (!string.IsNullOrEmpty(role))
             {
-                user.Roles.Add(new UserRole(tenant.Id, user.Id, defaultRole.Id));
+                // Find Role
+                userRole = _roleManager.Roles.FirstOrDefault(prop => prop.Name == role);
+                user.Roles.Add(new UserRole(tenant?.Id, user.Id, userRole.Id));
             }
 
-            await _userManager.InitializeOptionsAsync(tenant.Id);
+            await _userManager.InitializeOptionsAsync(tenant?.Id);
 
             CheckErrors(await _userManager.CreateAsync(user, plainPassword));
             await CurrentUnitOfWork.SaveChangesAsync();

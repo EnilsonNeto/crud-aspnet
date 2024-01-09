@@ -60,7 +60,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
-
+import { CreateResourcesHumansComponent } from './resources-humans/create-resources-humans/create-resources-humans.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 export const options: Partial<null | IConfig> | (() => Partial<IConfig>) = null;
 
 @NgModule({
@@ -95,7 +98,8 @@ export const options: Partial<null | IConfig> | (() => Partial<IConfig>) = null;
     TruckComponent,
     ResourcesHumansComponent,
     DriverComponent,
-    EmployeeComponent
+    EmployeeComponent,
+    CreateResourcesHumansComponent
   ],
   imports: [
     CommonModule,
@@ -127,9 +131,12 @@ export const options: Partial<null | IConfig> | (() => Partial<IConfig>) = null;
     MatTabsModule,
     MatDialogModule,
     MatSliderModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatTableModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
-  providers: [ 
+  providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },
   ],
   entryComponents: [
@@ -145,4 +152,4 @@ export const options: Partial<null | IConfig> | (() => Partial<IConfig>) = null;
     ResetPasswordDialogComponent,
   ],
 })
-export class AppModule {}
+export class AppModule { }

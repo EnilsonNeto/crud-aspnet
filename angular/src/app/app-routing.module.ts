@@ -20,6 +20,7 @@ import { DriverComponent } from './driver/driver.component';
                 path: '',
                 component: AppComponent,
                 children: [
+                    { path: 'home', component: HomeComponent, canActivate: [AppRouteGuard] },
                     { path: 'users', component: UsersComponent, data: { permission: 'Pages.Users' }, canActivate: [AppRouteGuard] },
                     { path: 'roles', component: RolesComponent, data: { permission: 'Pages.Roles' }, canActivate: [AppRouteGuard] },
                     { path: 'truck', component: TruckComponent, data: { permission: 'Pages.Trucks' }, canActivate: [AppRouteGuard] },

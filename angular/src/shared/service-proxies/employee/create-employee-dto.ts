@@ -63,6 +63,7 @@ export class CreateEmployeeDto implements ICreateEmployeeDto {
             this.name = data.name;
             this.age = data.age;
             this.ssn = data.ssn;
+            this.numberOfHouse = data.numberOfHouse;
             this.rg = data.rg;
             this.cep = data.cep;
             this.phoneNumber = data.phoneNumber;
@@ -98,6 +99,7 @@ export class CreateEmployeeDto implements ICreateEmployeeDto {
         data.image = this.image;
         data.truckId = this.truckId;
         data.departamentId = this.departamentId;
+        data.numberOfHouse = this.numberOfHouse;
 
         return data;
     }

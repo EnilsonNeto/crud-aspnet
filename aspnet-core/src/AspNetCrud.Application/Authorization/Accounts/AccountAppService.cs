@@ -43,14 +43,16 @@ namespace AspNetCrud.Authorization.Accounts
                 input.EmailAddress,
                 input.UserName,
                 input.Password,
-                true // Assumed email address is always confirmed. Change this if you want to implement email confirmation.
+                true, // Assumed email address is always confirmed. Change this if you want to implement email confirmation.
+                input.Role
             );
 
             var isEmailConfirmationRequiredForLogin = await SettingManager.GetSettingValueAsync<bool>(AbpZeroSettingNames.UserManagement.IsEmailConfirmationRequiredForLogin);
 
             return new RegisterOutput
             {
-                CanLogin = user.IsActive && (user.IsEmailConfirmed || !isEmailConfirmationRequiredForLogin)
+                CanLogin = user.IsActive && (user.IsEmailConfirmed || !isEmailConfirmationRequiredForLogin),
+                UserId = user.Id
             };
         }
     }
