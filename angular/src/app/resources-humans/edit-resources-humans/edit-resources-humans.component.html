@@ -20,7 +20,7 @@
                 <div class="infos">
                     <p><b>Telefone</b></p>
                     <mat-form-field appearance="outline">
-                        <mat-label>{{ formatPhoneNumber(resources.phoneNumber) }}</mat-label>
+                        <mat-label>Telefone</mat-label>
                         <input type="text" matInput formControlName="phoneNumber" placeholder="Digite seu telefone" mask="(00) 00000-0000">
                     </mat-form-field>
                 </div>
@@ -63,21 +63,21 @@
                 <div class="infos">
                     <p><b>Numero da casa</b></p>
                     <mat-form-field appearance="outline">
-                        <mat-label>{{resources.numberOfHouse}}</mat-label>
+                        <mat-label>Numero da casa</mat-label>
                         <input type="text" matInput formControlName="numberOfHouse" placeholder="Digite o numero da sua residencia">
                     </mat-form-field>
                 </div>
                 <div class="infos">
                     <p><b>Rua</b></p>
                     <mat-form-field appearance="outline">
-                        <mat-label>{{resources.street}}</mat-label>
+                        <mat-label>Rua</mat-label>
                         <input type="text" formControlName="street" placeholder="Digite o nome da sua Rua" matInput>
                     </mat-form-field>
                 </div>
                 <div class="infos">
                     <p><b>Bairro</b></p>
                     <mat-form-field appearance="outline">
-                        <mat-label>{{resources.neighborhood}}</mat-label>
+                        <mat-label>Bairro</mat-label>
                         <input type="text" formControlName="neighborhood" matInput placeholder="Digite o nome do seu bairro">
                     </mat-form-field>
                 </div>
@@ -86,14 +86,14 @@
                 <div class="infos">
                     <p><b>CEP</b></p>
                     <mat-form-field appearance="outline">
-                        <mat-label>{{ formatCep(resources.cep) }}</mat-label>
+                        <mat-label>CEP</mat-label>
                         <input type="text" formControlName="cep" matInput placeholder="Digite o seu CEP">
                     </mat-form-field>
                 </div>
                 <div class="infos">
                     <p><b>Complemento</b></p>
                     <mat-form-field appearance="outline">
-                        <mat-label>{{ resources.complement }}</mat-label>
+                        <mat-label>Complemento</mat-label>
                         <input type="text" formControlName="complement" matInput placeholder="Digite o seu Complemento">
                     </mat-form-field>
                 </div>
@@ -101,6 +101,6 @@
         </div>
     </form>
     <div class="btnGroup">
-        <button mat-flat-button color="primary" (click)="edit()">Editar Informações</button>
+        <button mat-flat-button color="primary" mat-dialog-close (click)="edit()">Editar Informações</button>
     </div>
 </div>

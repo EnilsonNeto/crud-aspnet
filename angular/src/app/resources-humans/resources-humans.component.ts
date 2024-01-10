@@ -52,7 +52,8 @@ export class ResourcesHumansComponent extends AppComponentBase implements OnInit
     });
     dialog.componentInstance.idHash = id;
     dialog.afterClosed().subscribe(() => {
-      this.toggleSidebar(false)
+      this.toggleSidebar(false);
+      this.getAllResources();
     })
   }
 
@@ -64,7 +65,8 @@ export class ResourcesHumansComponent extends AppComponentBase implements OnInit
     });
     dialog.componentInstance.idHash = id;
     dialog.afterClosed().subscribe(() => {
-      this.toggleSidebar(false)
+      this.toggleSidebar(false);
+      this.getAllResources();
     })
   }
 

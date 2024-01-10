@@ -29,6 +29,7 @@ export class EditResourcesHumansComponent extends AppComponentBase implements On
 
   ngOnInit(): void {
     this.getEmployee();
+    this.forms()
   }
 
   forms() {
@@ -50,34 +51,32 @@ export class EditResourcesHumansComponent extends AppComponentBase implements On
       departamentId: ['ee514acb-773d-4af3-6006-08dc11112346'],
       isActive: [true]
     });
-   
-    this.firstForm.patchValue({
-      id: this.resources.id,
-      imagesUrl: this.resources.imagesUrl,
-      name: this.resources.name,
-      surname: this.resources.surname,
-      email: this.resources.email,
-      phoneNumber: this.resources.phoneNumber,
-      age: this.resources.age,
-      dateOfBirth: this.resources.dateOfBirth,
-      ssn: this.resources.ssn,
-      rg: this.resources.rg,
-      cep: this.resources.cep,
-      street: this.resources.street,
-      neighborhood: this.resources.neighborhood,
-      numberOfHouse: this.resources.numberOfHouse,
-      complement: this.resources.complement,
-      departamentId: this.resources.departamentId,
-      isActive: this.resources.isActive
-    });
    }
 
   getEmployee() {
     this._employeeService.get(this.idHash).subscribe((data: EmployeeDto) => {
       this.resources = data;
       this._departmentService.get(data.departamentId).subscribe((data: DepartamentDto) => {
-        this.department = data.type
-        this.forms();
+        this.department = data.type;
+        this.firstForm.patchValue({
+          id: this.resources.id,
+          imagesUrl: this.resources.imagesUrl,
+          name: this.resources.name,
+          surname: this.resources.surname,
+          email: this.resources.email,
+          phoneNumber: this.resources.phoneNumber,
+          age: this.resources.age,
+          dateOfBirth: this.resources.dateOfBirth,
+          ssn: this.resources.ssn,
+          rg: this.resources.rg,
+          cep: this.resources.cep,
+          street: this.resources.street,
+          neighborhood: this.resources.neighborhood,
+          numberOfHouse: this.resources.numberOfHouse,
+          complement: this.resources.complement,
+          departamentId: this.resources.departamentId,
+          isActive: this.resources.isActive
+        });
       })
     })
   }
@@ -115,13 +114,16 @@ export class EditResourcesHumansComponent extends AppComponentBase implements On
    edit() {
     if (this.firstForm && this.firstForm.valid) {
       const form = this.firstForm.value;
-      this.resources = form;
-      console.log(this.resources);
-   
-      this._employeeService.update(this.resources).subscribe((data: any) => {
-        console.log(data);
-        
-      })
+      const updatedFields = {};
+      for (const key in form) {
+        if (form.hasOwnProperty(key) && form[key] !== this.resources[key]) {
+          updatedFields[key] = form[key];
+        }
+      }
+      const updatedResources = new EmployeeDto({ ...this.resources, ...updatedFields });
+      this._employeeService.update(updatedResources).subscribe((data: any) => {
+        this.notify.info(this.l('Usuario editado com sucesso'));
+      });
     }
-   }
+  }
 }

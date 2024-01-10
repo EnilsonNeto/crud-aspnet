@@ -53,6 +53,11 @@
                             <input class="input-place" matInput name="Surname" [(ngModel)]="model.surname"
                                 placeholder="Digite seu Sobrenome" formControlName="surname" maxlength="256" required>
                         </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Idade</mat-label>
+                            <input class="input-place" matInput name="age" [(ngModel)]="resources.age"
+                                placeholder="Digite sua Idade" formControlName="age" maxlength="256" required>
+                        </mat-form-field>
                         <mat-form-field appearance="outline" class="Input">
                             <mat-label>Celular</mat-label>
                             <input class="input-place" matInput name="phoneNumber" placeholder="(__) ____-____"
