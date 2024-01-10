@@ -1,6 +1,12 @@
  <h1 align="center">
     CRUD de Funcionários: Uma Solução de Gerenciamento Logístico;
 </h1>
+<br>
+  <img src="https://github.com/EnilsonNeto/crud-aspnet/blob/main/angular/src/shared/images/fixedImage.jpg">
+<br>
+<h1 align="center">
+<img src="https://github.com/EnilsonNeto/crud-aspnet/blob/main/angular/src/shared/images/videoImage.gif">
+</h1>
 
 ### Tecnologias e Padrões Utilizados
 - **Frontend:** Angular 12
