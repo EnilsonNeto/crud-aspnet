@@ -6,6 +6,8 @@ import { AppComponentBase } from '@shared/app-component-base';
 import { EmployeeDto } from '@shared/service-proxies/employee/Employee-dto';
 import { EmployeeServiceProxy } from '@shared/service-proxies/employee/employee-service-proxy';
 import { InfoResourcesHumansComponent } from './info-resources-humans/info-resources-humans.component';
+import { LayoutStoreService } from '@shared/layout/layout-store.service';
+import { EditResourcesHumansComponent } from './edit-resources-humans/edit-resources-humans.component';
 
 @Component({
   selector: 'app-resources-humans',
@@ -20,7 +22,8 @@ export class ResourcesHumansComponent extends AppComponentBase implements OnInit
   
   constructor(inector: Injector,
               private _employeeService: EmployeeServiceProxy,
-              private _dialog: MatDialog) {
+              private _dialog: MatDialog,
+              private _layoutStore: LayoutStoreService) {
     super(inector);
   }
 
@@ -42,10 +45,37 @@ export class ResourcesHumansComponent extends AppComponentBase implements OnInit
   }
 
   openInfo(id: any) {
+    this.toggleSidebar(true)
     const dialog = this._dialog.open(InfoResourcesHumansComponent, {
-      width : '55%',
-      height: '55%'
+      width : '70%',
+      height: '70%'
     });
     dialog.componentInstance.idHash = id;
+    dialog.afterClosed().subscribe(() => {
+      this.toggleSidebar(false)
+    })
+  }
+
+  openEdit(id: any) {
+    this.toggleSidebar(true)
+    const dialog = this._dialog.open(EditResourcesHumansComponent, {
+      width : '70%',
+      height: '70%'
+    });
+    dialog.componentInstance.idHash = id;
+    dialog.afterClosed().subscribe(() => {
+      this.toggleSidebar(false)
+    })
+  }
+
+  toggleSidebar(bool: boolean): void {
+    this._layoutStore.setSidebarExpanded(bool);
+  }
+
+  deleteResources(id: any) {
+    this._employeeService.delete(id).subscribe((data: any) => {
+      this.notify.info(this.l('Deletado com sucesso'));
+      this.getAllResources();
+    })
   }
 } 

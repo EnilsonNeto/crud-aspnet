@@ -57,27 +57,9 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
             ),
             new MenuItem(
                 this.l('Funcionários'),
-                '/app/employees',
-                'fa fa-address-book',
-                'Pages.Employees'
-            ),
-            new MenuItem(
-                this.l('Departamentos RH'),
                 '/app/departaments',
                 'fa fa-briefcase',
                 'Pages.Departaments'
-            ),
-            new MenuItem(
-                this.l('Motoristas'),
-                '/app/drivers',
-                'fa fa-id-card',
-                'Pages.Trucks'
-            ),
-            new MenuItem(
-                this.l('Veículos'),
-                '/app/truck',
-                'fa fa-truck',
-                'Pages.Trucks'
             ),
         ];
     }

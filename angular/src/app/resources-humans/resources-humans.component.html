@@ -35,10 +35,10 @@
                                 </svg>
                             </button>
                             <mat-menu #menu="matMenu">
-                                <button title="Excluir usuário" mat-menu-item>
+                                <button title="Excluir usuário" mat-menu-item (click)="deleteResources(element.id)">
                                     Excluir Usuário
                                 </button>
-                                <button title="Editar Paciente" mat-menu-item>
+                                <button title="Editar Paciente" mat-menu-item (click)="openEdit(element.id)">
                                     Editar Informações
                                 </button>
                                 <button title="Vizualizar Paciente" (click)="openInfo(element.id)" mat-menu-item>

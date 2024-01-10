@@ -75,6 +75,7 @@ export class EmployeeDto implements IEmployeeDto {
             this.ssn = data.ssn;
             this.rg = data.rg;
             this.cep = data.cep;
+            this.numberOfHouse = data.numberOfHouse;
             this.phoneNumber = data.phoneNumber;
             this.surname = data.surname;
             this.dateOfBirth = data.dateOfBirth;
@@ -101,6 +102,7 @@ export class EmployeeDto implements IEmployeeDto {
         data.rg = this.rg;
         data.cep = this.cep;
         data.surname = this.surname;
+        data.numberOfHouse = this.numberOfHouse;
         data.phoneNumber = this.phoneNumber;
         data.dateOfBirth = this.dateOfBirth;
         data.neighborhood = this.neighborhood;

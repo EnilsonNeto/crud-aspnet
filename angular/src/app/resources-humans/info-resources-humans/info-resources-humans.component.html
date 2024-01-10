@@ -1,1 +1,101 @@
-<p>info-resources-humans works!</p>
+<div class="btnGroup">
+    <button mat-icon-button mat-dialog-close><mat-icon>close</mat-icon></button>
+</div>
+<div class="main">
+    <div class="topInformations" *ngIf="resources != undefined">
+        <div class="imageClass">
+            <img src="{{resources.imagesUrl ? resources.imagesUrl : 'Sem Imagem'}}" alt="">
+        </div>
+        <div class="personalInformations">
+            <h3>{{resources.name}} {{resources.surname}}</h3>
+            <p><b>Email: </b> {{resources.email}}</p>
+            <p><b>Departamento: </b> {{department}}</p>
+        </div>
+    </div>
+    <hr>
+    <h3>Informações Pessoais</h3>
+    <div class="midInfos">
+        <div class="containerMid">
+            <div class="infos">
+                <p><b>Telefone</b></p>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ formatPhoneNumber(resources.phoneNumber) }}</mat-label>
+                    <input type="text" [disabled]="true" matInput>
+                </mat-form-field>
+            </div>
+            <div class="infos">
+                <p><b>Idade</b></p>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{resources.age}}</mat-label>
+                    <input type="text" [disabled]="true" matInput>
+                </mat-form-field>
+            </div>
+            <div class="infos">
+                <p><b>Data de nascimento</b></p>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{resources.dateOfBirth | date}}</mat-label>
+                    <input type="text" [disabled]="true" matInput>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="containerMid">
+            <div class="infos">
+                <p><b>CPF</b></p>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ formatCpf(resources.ssn) }}</mat-label>
+                    <input type="text" [disabled]="true" matInput>
+                </mat-form-field>
+            </div>
+            <div class="infos">
+                <p><b>RG</b></p>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{resources.rg}}</mat-label>
+                    <input type="text" [disabled]="true" matInput>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <h3>Informações de endereço</h3>
+    <div class="midInfos">
+        <div class="containerMid">
+            <div class="infos">
+                <p><b>Numero da casa</b></p>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{resources.numberOfHouse}}</mat-label>
+                    <input type="text" [disabled]="true" matInput>
+                </mat-form-field>
+            </div>
+            <div class="infos">
+                <p><b>Rua</b></p>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{resources.street}}</mat-label>
+                    <input type="text" [disabled]="true" matInput>
+                </mat-form-field>
+            </div>
+            <div class="infos">
+                <p><b>Bairro</b></p>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{resources.neighborhood}}</mat-label>
+                    <input type="text" [disabled]="true" matInput>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="containerMid">
+            <div class="infos">
+                <p><b>CEP</b></p>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ formatCep(resources.cep) }}</mat-label>
+                    <input type="text" [disabled]="true" matInput>
+                </mat-form-field>
+            </div>
+            <div class="infos">
+                <p><b>Complemento</b></p>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ resources.complement }}</mat-label>
+                    <input type="text" matInput placeholder="Digite o seu Complemento" >
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+</div>
