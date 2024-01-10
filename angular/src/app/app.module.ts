@@ -38,6 +38,35 @@ import { SidebarComponent } from './layout/sidebar.component';
 import { SidebarLogoComponent } from './layout/sidebar-logo.component';
 import { SidebarUserPanelComponent } from './layout/sidebar-user-panel.component';
 import { SidebarMenuComponent } from './layout/sidebar-menu.component';
+import { TruckComponent } from './truck/truck.component';
+import { ResourcesHumansComponent } from './resources-humans/resources-humans.component';
+import { DriverComponent } from './driver/driver.component';
+import { EmployeeComponent } from './employee/employee.component';
+import { MatIconModule } from '@angular/material/icon'
+import { MatSliderModule } from '@angular/material/slider';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { IConfig, NgxMaskModule } from 'ngx-mask';
+import { CreateResourcesHumansComponent } from './resources-humans/create-resources-humans/create-resources-humans.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { InfoResourcesHumansComponent } from './resources-humans/info-resources-humans/info-resources-humans.component';
+import { EditResourcesHumansComponent } from './resources-humans/edit-resources-humans/edit-resources-humans.component';
+export const options: Partial<null | IConfig> | (() => Partial<IConfig>) = null;
 
 @NgModule({
   declarations: [
@@ -67,7 +96,14 @@ import { SidebarMenuComponent } from './layout/sidebar-menu.component';
     SidebarComponent,
     SidebarLogoComponent,
     SidebarUserPanelComponent,
-    SidebarMenuComponent
+    SidebarMenuComponent,
+    TruckComponent,
+    ResourcesHumansComponent,
+    DriverComponent,
+    EmployeeComponent,
+    CreateResourcesHumansComponent,
+    InfoResourcesHumansComponent,
+    EditResourcesHumansComponent
   ],
   imports: [
     CommonModule,
@@ -83,8 +119,30 @@ import { SidebarMenuComponent } from './layout/sidebar-menu.component';
     ServiceProxyModule,
     SharedModule,
     NgxPaginationModule,
+    MatFormFieldModule,
+    MatStepperModule,
+    MatInputModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatAutocompleteModule,
+    MatCardModule,
+    MatMenuModule,
+    MatIconModule,
+    MatSelectModule,
+    NgxMaskModule.forRoot(),
+    MatRadioModule,
+    MatCheckboxModule,
+    MatTabsModule,
+    MatDialogModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatTableModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
-  providers: [],
+  providers: [
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+  ],
   entryComponents: [
     // tenants
     CreateTenantDialogComponent,
@@ -98,4 +156,4 @@ import { SidebarMenuComponent } from './layout/sidebar-menu.component';
     ResetPasswordDialogComponent,
   ],
 })
-export class AppModule {}
+export class AppModule { }

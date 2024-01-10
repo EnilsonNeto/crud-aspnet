@@ -1,5 +1,8 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "726d12cd-ea08-4d38-a889-aac4941b4df0"
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -36,7 +39,9 @@
               "src/assets/freeze-ui/freeze-ui.css",
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "node_modules/admin-lte-css-only/css/adminlte.min.css",
-              "src/shared/core.less"
+              "src/shared/core.less",
+              "src/styles.scss",
+              "src/theme/global.scss"
             ],
             "scripts": [
               "node_modules/moment/min/moment.min.js",
@@ -142,7 +147,9 @@
               "src/assets/freeze-ui/freeze-ui.css",
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "node_modules/admin-lte-css-only/css/adminlte.min.css",
-              "src/shared/core.less"
+              "src/shared/core.less",
+              "src/styles.scss",
+              "src/theme/global.scss"
             ],
             "scripts": [
               "node_modules/moment/min/moment.min.js",

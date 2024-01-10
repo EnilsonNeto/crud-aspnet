@@ -17,6 +17,7 @@ import { LayoutStoreService } from './layout/layout-store.service';
 
 import { BusyDirective } from './directives/busy.directive';
 import { EqualValidator } from './directives/equal-validator.directive';
+import { AzureStorageService } from './storageImages/azure-storage-service.service';
 
 @NgModule({
     imports: [
@@ -52,7 +53,8 @@ export class SharedModule {
                 AppUrlService,
                 AppAuthService,
                 AppRouteGuard,
-                LayoutStoreService
+                LayoutStoreService,
+                AzureStorageService
             ]
         };
     }

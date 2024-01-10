@@ -1131,11 +1131,11 @@ export class TokenAuthServiceProxy {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             if (Array.isArray(resultData200)) {
@@ -1149,11 +1149,11 @@ export class TokenAuthServiceProxy {
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<ExternalLoginProviderInfoModel[]>(<any>null);
+        return _observableOf(null as any);
     }
 
     /**
@@ -2546,6 +2546,7 @@ export class GetCurrentLoginInformationsOutput implements IGetCurrentLoginInform
     application: ApplicationInfoDto;
     user: UserLoginInfoDto;
     tenant: TenantLoginInfoDto;
+    employeeId: string | undefined;
 
     constructor(data?: IGetCurrentLoginInformationsOutput) {
         if (data) {
@@ -2561,6 +2562,7 @@ export class GetCurrentLoginInformationsOutput implements IGetCurrentLoginInform
             this.application = _data["application"] ? ApplicationInfoDto.fromJS(_data["application"]) : <any>undefined;
             this.user = _data["user"] ? UserLoginInfoDto.fromJS(_data["user"]) : <any>undefined;
             this.tenant = _data["tenant"] ? TenantLoginInfoDto.fromJS(_data["tenant"]) : <any>undefined;
+            this.employeeId = _data["employeeId"] || undefined;
         }
     }
 
@@ -2576,6 +2578,7 @@ export class GetCurrentLoginInformationsOutput implements IGetCurrentLoginInform
         data["application"] = this.application ? this.application.toJSON() : <any>undefined;
         data["user"] = this.user ? this.user.toJSON() : <any>undefined;
         data["tenant"] = this.tenant ? this.tenant.toJSON() : <any>undefined;
+        data["employeeId"] = this.employeeId || undefined;
         return data; 
     }
 
@@ -2591,6 +2594,7 @@ export interface IGetCurrentLoginInformationsOutput {
     application: ApplicationInfoDto;
     user: UserLoginInfoDto;
     tenant: TenantLoginInfoDto;
+    employeeId: string | undefined;
 }
 
 export class GetRoleForEditOutput implements IGetRoleForEditOutput {
@@ -2906,6 +2910,7 @@ export class RegisterInput implements IRegisterInput {
     emailAddress: string;
     password: string;
     captchaResponse: string | undefined;
+    role: string;
 
     constructor(data?: IRegisterInput) {
         if (data) {
@@ -2923,6 +2928,7 @@ export class RegisterInput implements IRegisterInput {
             this.userName = _data["userName"];
             this.emailAddress = _data["emailAddress"];
             this.password = _data["password"];
+            this.role = _data["role"]
             this.captchaResponse = _data["captchaResponse"];
         }
     }
@@ -2942,6 +2948,7 @@ export class RegisterInput implements IRegisterInput {
         data["emailAddress"] = this.emailAddress;
         data["password"] = this.password;
         data["captchaResponse"] = this.captchaResponse;
+        data["role"] = this.role;
         return data; 
     }
 
@@ -2964,6 +2971,7 @@ export interface IRegisterInput {
 
 export class RegisterOutput implements IRegisterOutput {
     canLogin: boolean;
+    userId: number | undefined;
 
     constructor(data?: IRegisterOutput) {
         if (data) {
@@ -2977,6 +2985,7 @@ export class RegisterOutput implements IRegisterOutput {
     init(_data?: any) {
         if (_data) {
             this.canLogin = _data["canLogin"];
+            this.userId = _data["userId"];
         }
     }
 
@@ -2990,6 +2999,7 @@ export class RegisterOutput implements IRegisterOutput {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["canLogin"] = this.canLogin;
+        data["userId"] = this.userId;
         return data; 
     }
 
@@ -3721,7 +3731,7 @@ export class UserLoginInfoDto implements IUserLoginInfoDto {
     surname: string | undefined;
     userName: string | undefined;
     emailAddress: string | undefined;
-
+    roleNames!: string[] | undefined;
     constructor(data?: IUserLoginInfoDto) {
         if (data) {
             for (var property in data) {
@@ -3738,6 +3748,7 @@ export class UserLoginInfoDto implements IUserLoginInfoDto {
             this.surname = _data["surname"];
             this.userName = _data["userName"];
             this.emailAddress = _data["emailAddress"];
+            this.roleNames = _data["roleNames"];
         }
     }
 
@@ -3755,6 +3766,7 @@ export class UserLoginInfoDto implements IUserLoginInfoDto {
         data["surname"] = this.surname;
         data["userName"] = this.userName;
         data["emailAddress"] = this.emailAddress;
+        data["roleNames"] = this.roleNames;
         return data; 
     }
 
@@ -3819,4 +3831,29 @@ function blobToText(blob: any): Observable<string> {
             reader.readAsText(blob);
         }
     });
+
+    function throwException(message: string, status: number, response: string, headers: { [key: string]: any; }, result?: any): Observable<any> {
+        if (result !== null && result !== undefined)
+            return _observableThrow(result);
+        else
+            return _observableThrow(new ApiException(message, status, response, headers, null));
+    }
+    
+    function blobToText(blob: any): Observable<string> {
+        return new Observable<string>((observer: any) => {
+            if (!blob) {
+                observer.next("");
+                observer.complete();
+            } else {
+                let reader = new FileReader();
+                reader.onload = event => {
+                    observer.next((<any>event.target).result);
+                    observer.complete();
+                };
+                reader.readAsText(blob);
+            }
+        });
+    }
+    
 }
+

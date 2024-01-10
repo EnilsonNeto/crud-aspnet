@@ -1,0 +1,60 @@
+<mat-horizontal-stepper>
+    <mat-step [stepControl]="firstStep">
+        <div class="main">
+            <hr>
+            <h2>Lista de colaboradores dos Recursos Humanos</h2>
+            <p>Abaixo esta listado dos os colaboradores cadastrados no sistema.</p>
+            <p><b>Caso deseja criar um novo colaborador clique no botão abaixo.</b></p>
+            <div class="btnGroup">
+                <button mat-flat-button color="primary" matStepperNext><mat-icon>add_circle</mat-icon> Adicionar novo
+                    colaborador </button>
+            </div>
+            <hr>
+            <mat-card>
+                <mat-table [dataSource]="dataSource">
+                    <ng-container matColumnDef="name">
+                        <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="surname">
+                        <mat-header-cell *matHeaderCellDef> Sobrenome </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.surname}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="email">
+                        <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="actions">
+                        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <button class="centerg" title="Ações" mat-icon-button [matMenuTriggerFor]="menu">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-three-dots" viewBox="0 0 16 16">
+                                    <path
+                                        d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
+                                </svg>
+                            </button>
+                            <mat-menu #menu="matMenu">
+                                <button title="Excluir usuário" mat-menu-item (click)="deleteResources(element.id)">
+                                    Excluir Usuário
+                                </button>
+                                <button title="Editar Paciente" mat-menu-item (click)="openEdit(element.id)">
+                                    Editar Informações
+                                </button>
+                                <button title="Vizualizar Paciente" (click)="openInfo(element.id)" mat-menu-item>
+                                    Vizualizar Informações
+                                </button>
+                            </mat-menu> </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+                </mat-table>
+            </mat-card>
+        </div>
+    </mat-step>
+    <mat-step [stepControl]="secondStep">
+        <app-create-resources-humans (onSave)="getAllResources()"></app-create-resources-humans>
+    </mat-step>
+</mat-horizontal-stepper>

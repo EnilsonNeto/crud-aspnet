@@ -1,0 +1,130 @@
+<div class="main">
+    <div class="container">
+        <div class="rightBox">
+            <div class="body">
+                <div class="TitleRegister">
+                    <button mat-icon-button matStepperPrevious>
+                        <i class="fa fa-chevron-left BackIcon"></i>
+                    </button>
+                </div>
+                <form [formGroup]="firstFormGroup">
+                    <div class="topInfo">
+                        <div class="UserPhoto">
+                            <h3 class="UserPhotoText">Adicionar foto de perfil</h3>
+                            <p class="UserPhotoTextDescription">Clique no botão abaixo para fazer o upload de uma imagem
+                            </p>
+                        </div>
+                        <input type="file" (change)="onFileSelected($event)">
+                    </div>
+                    <div class="loginInformations">
+                        <p>Informações de login.</p>
+                        <div class="userInfo">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Nome de usuário</mat-label>
+                                <input class="input-place" matInput name="username"
+                                    placeholder="Digite seu nome de usuário" [(ngModel)]="model.userName"
+                                    maxlength="255" formControlName="userName" required>
+                            </mat-form-field>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Email</mat-label>
+                                <input class="input-place" matInput type="email" name="EmailAddress"
+                                    placeholder="Digite seu e-mail" [(ngModel)]="model.emailAddress" maxlength="255"
+                                    formControlName="email">
+                            </mat-form-field>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Senha</mat-label>
+                                <input class="input-place" matInput name="Password" [(ngModel)]="model.password"
+                                    placeholder="Crie sua senha" type="password" formControlName="password"
+                                    maxlength="32">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="TitleUserInfo">
+                        <p class="TitleUserInfo">Informações Pessoais</p>
+                    </div>
+                    <div class="UserInfo">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Nome</mat-label>
+                            <input matInput class="input-place" name="Name" [(ngModel)]="model.name"
+                                placeholder="Digite seu nome" formControlName="name" maxlength="256" required autofocus>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Sobrenome</mat-label>
+                            <input class="input-place" matInput name="Surname" [(ngModel)]="model.surname"
+                                placeholder="Digite seu Sobrenome" formControlName="surname" maxlength="256" required>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Idade</mat-label>
+                            <input class="input-place" matInput name="age" [(ngModel)]="resources.age"
+                                placeholder="Digite sua Idade" formControlName="age" maxlength="256" required>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="Input">
+                            <mat-label>Celular</mat-label>
+                            <input class="input-place" matInput name="phoneNumber" placeholder="(__) ____-____"
+                                mask="(00) 00000-0000" [(ngModel)]="resources.phoneNumber" required maxlength="20"
+                                formControlName="phoneNumber" />
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="Input">
+                            <mat-label>CPF</mat-label>
+                            <input class="input-place" matInput name="ssn" placeholder="Digite seu CPF"
+                                mask="000.000.000-00" [(ngModel)]="resources.ssn" required maxlength="48"
+                                formControlName="ssn" />
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="Input">
+                            <mat-label>RG</mat-label>
+                            <input class="input-place" matInput name="rg" placeholder="Digite seu Rg"
+                                [(ngModel)]="resources.rg" required maxlength="48" formControlName="rg" />
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{resources.dateOfBirth ? resources.dateOfBirth : 'Data de
+                                Nascimento'}}</mat-label>
+                            <input matInput [matDatepicker]="picker" (click)="picker.open()"
+                                formControlName="dateOfBirth">
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="Separation"></div>
+                    <div class="TitlePersonInfo">
+                        <p>Endereço</p>
+                    </div>
+                    <div class="PersonInfoAdress">
+                        <mat-form-field appearance="outline" class="Input">
+                            <mat-label>Rua</mat-label>
+                            <input class="input-place" matInput name="street" placeholder="Escreva o nome da rua"
+                                [(ngModel)]="resources.street" required maxlength="256" formControlName="street" />
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="Input">
+                            <mat-label>Número</mat-label>
+                            <input class="input-place" matInput name="numberOfHouse" placeholder="Escreva o número"
+                                [(ngModel)]="resources.numberOfHouse" required maxlength="20"
+                                formControlName="numberOfHouse" />
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="Input">
+                            <mat-label>Bairro</mat-label>
+                            <input class="input-place" matInput name="neighborhood" placeholder="Escreva o Bairro"
+                                [(ngModel)]="resources.neighborhood" required maxlength="48"
+                                formControlName="neighborhood" />
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="Input">
+                            <mat-label>CEP</mat-label>
+                            <input class="input-place" matInput name="cep" mask="00000-000" mask="00000-000"
+                                [(ngModel)]="resources.cep" required maxlength="36" formControlName="cep" />
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="Input">
+                            <mat-label>Complemento</mat-label>
+                            <input class="input-place" matInput name="complement" placeholder="Escreva o complemento"
+                                [(ngModel)]="resources.complement" required maxlength="48"
+                                formControlName="complement" />
+                        </mat-form-field>
+                    </div>
+                </form>
+            </div>
+            <div class="btnGroup">
+                <button mat-flat-button id="bttn-Color" (click)="save()" color="primary" matStepperPrevious>
+                    <mat-icon>done</mat-icon>
+                    {{ "Salvar informações"
+                    | localize }}</button>
+            </div>
+        </div>
+    </div>
+</div>

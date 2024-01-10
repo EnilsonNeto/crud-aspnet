@@ -1,12 +1,34 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Abp.Auditing;
+using Abp.Domain.Repositories;
 using AspNetCrud.Sessions.Dto;
 
 namespace AspNetCrud.Sessions
 {
+    using Abp.Domain.Repositories;
+    using Authorization.Users;
+    using System;
+    using Authorization.Roles;
+    using System.Linq;
+    using Employees;
+
     public class SessionAppService : AspNetCrudAppServiceBase, ISessionAppService
     {
+        private readonly RoleManager _roleManager;
+        private readonly IRepository<User, long> _userRepository;
+        private readonly IRepository<EmployeeUser, Guid> _employeeUserRepository;
+
+        public SessionAppService(RoleManager roleManager,
+                                 IRepository<User, long> userRepository,
+                                 IRepository<EmployeeUser, Guid> employeeUserRepository)
+        {
+            _roleManager = roleManager;
+            _userRepository = userRepository;
+            _employeeUserRepository = employeeUserRepository;
+        }
+
         [DisableAuditing]
         public async Task<GetCurrentLoginInformationsOutput> GetCurrentLoginInformations()
         {
@@ -19,6 +41,7 @@ namespace AspNetCrud.Sessions
                     Features = new Dictionary<string, bool>()
                 }
             };
+            output.Tenant = ObjectMapper.Map<TenantLoginInfoDto>(await GetCurrentTenantAsync(AbpSession.TenantId.HasValue ? AbpSession.TenantId.Value : 1));
 
             if (AbpSession.TenantId.HasValue)
             {
@@ -27,10 +50,27 @@ namespace AspNetCrud.Sessions
 
             if (AbpSession.UserId.HasValue)
             {
-                output.User = ObjectMapper.Map<UserLoginInfoDto>(await GetCurrentUserAsync());
+                output.User = MapToEntityDto(_userRepository.GetAllIncluding(prop => prop.Roles).FirstOrDefault(prop => prop.Id == AbpSession.UserId.Value));
+
+                var employeeUser = _employeeUserRepository.FirstOrDefault(prop => prop.UserId == AbpSession.UserId.Value);
+                if (employeeUser != null && employeeUser.UserId > 0)
+                    output.EmployeeId = employeeUser.EmployeeId;
+
             }
 
             return output;
+        }
+
+        private UserLoginInfoDto MapToEntityDto(User user)
+        {
+            var roles = user.Roles.Select(r => r.RoleId);
+            var userDto = ObjectMapper.Map<UserLoginInfoDto>(user);
+            if (roles.Count() > 0)
+            {
+                var roleNames = _roleManager.Roles.Where(r => roles.Any(id => id == r.Id)).Select(prop => prop.Name.ToUpper()).ToArray();
+                userDto.RoleNames = roleNames;
+            }
+            return userDto;
         }
     }
 }

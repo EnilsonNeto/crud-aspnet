@@ -1,0 +1,14 @@
+.btnGroup {
+    display: flex;
+    flex-direction: row;
+    grid-gap: 10px;
+    gap: 10px;
+    width: 100%;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+mat-form-field {
+    margin-right: 10px;
+}

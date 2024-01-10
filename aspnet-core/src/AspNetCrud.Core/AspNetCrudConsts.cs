@@ -10,6 +10,7 @@ namespace AspNetCrud
 
         public const bool MultiTenancyEnabled = true;
 
+        public const int DefaultTenancyId = 1;
 
         /// <summary>
         /// Default pass phrase for SimpleStringCipher decrypt/encrypt operations

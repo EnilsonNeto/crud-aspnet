@@ -1,0 +1,42 @@
+@use '@angular/material' as mat;
+
+@import '@angular/material/theming';
+
+@include mat.core();
+
+$aspnetcrud-primary: mat.define-palette(mat.$blue-palette);
+$aspnetcrud-accent: mat.define-palette(mat.$indigo-palette, 900);
+$custom-color: #00815a;
+
+$aspnetcrud-warn: mat.define-palette(mat.$red-palette);
+
+$aspnetcrud-theme: mat.define-light-theme((
+  color: (
+    primary: (
+      default: $custom-color,
+      lighter: lighten($custom-color, 10%),
+      darker: darken($custom-color, 10%)
+    ),
+    accent: $aspnetcrud-accent,
+    warn: $aspnetcrud-warn,
+  ),
+  text: (
+    primary: #fff,
+    accent: #fff,
+    warn: #fff,
+  )
+));
+
+@include mat.all-component-themes($aspnetcrud-theme);
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active, .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
+  background-color: #00815a;
+  color: #fff;
+}
+
+a {
+  color: #00815a;
+}
