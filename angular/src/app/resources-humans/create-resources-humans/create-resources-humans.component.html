@@ -71,14 +71,13 @@
                                 [(ngModel)]="resources.rg" required maxlength="48" formControlName="rg" />
                         </mat-form-field>
                         <mat-form-field appearance="outline">
-                            <mat-label>{{resources.dateOfBirth ? resources.dateOfBirth : 'Data de Nascimento'}}</mat-label>
-                            <input matInput [matDatepicker]="picker" (click)="picker.open()" formControlName="dateOfBirth">
+                            <mat-label>{{resources.dateOfBirth ? resources.dateOfBirth : 'Data de
+                                Nascimento'}}</mat-label>
+                            <input matInput [matDatepicker]="picker" (click)="picker.open()"
+                                formControlName="dateOfBirth">
                             <mat-datepicker #picker></mat-datepicker>
-                          </mat-form-field>
-                       
+                        </mat-form-field>
                     </div>
-
-                    <button (click)="teste()">teste</button>
                     <div class="Separation"></div>
                     <div class="TitlePersonInfo">
                         <p>Endereço</p>

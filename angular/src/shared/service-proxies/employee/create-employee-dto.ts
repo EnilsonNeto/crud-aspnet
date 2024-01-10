@@ -13,7 +13,7 @@ export interface ICreateEmployeeDto {
     numberOfHouse: string;
     complement: string;
     isActive: boolean;
-    imageUrl: string;
+    imagesUrl: string;
     image: File;
     truckId?: string;
     departamentId: string;
@@ -42,7 +42,7 @@ export class CreateEmployeeDto implements ICreateEmployeeDto {
     numberOfHouse: string;
     complement: string;
     isActive: boolean;
-    imageUrl: string;
+    imagesUrl: string;
     image: File;
     truckId?: string;
     departamentId: string;
@@ -73,7 +73,7 @@ export class CreateEmployeeDto implements ICreateEmployeeDto {
             this.complement = data.complement;
             this.street = data.street;
             this.isActive = data.isActive;
-            this.imageUrl = data.imageUrl;
+            this.imagesUrl = data.imagesUrl;
             this.image = data.image;
             this.truckId = data.truckId;
             this.departamentId = data.departamentId;
@@ -95,7 +95,7 @@ export class CreateEmployeeDto implements ICreateEmployeeDto {
         data.complement = this.complement;
         data.street = this.street;
         data.isActive = this.isActive;
-        data.imageUrl = this.imageUrl;
+        data.imagesUrl = this.imagesUrl;
         data.image = this.image;
         data.truckId = this.truckId;
         data.departamentId = this.departamentId;

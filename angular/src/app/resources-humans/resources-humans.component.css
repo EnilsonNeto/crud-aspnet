@@ -23,8 +23,11 @@ mat-cell {
     flex-direction: row;
     grid-gap: 10px;
     gap: 10px;
-    justify-content: flex-end;
     width: 100%;
     margin-bottom: 15px;
     margin-top: 15px;
+}
+
+.main {
+    padding: 20px;
 }

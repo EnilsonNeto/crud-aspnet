@@ -55,7 +55,6 @@ export class CreateResourcesHumansComponent extends AppComponentBase implements 
       neighborhood: ['', Validators.required],
       numberOfHouse: ['12', Validators.required],
       complement: ['', Validators.required],
-      imageUrl: [''],
       truckId: [''],
       departamentId: ['ee514acb-773d-4af3-6006-08dc11112346', Validators.required],
       isActive: [true]
@@ -82,7 +81,6 @@ export class CreateResourcesHumansComponent extends AppComponentBase implements 
       ).subscribe((result: RegisterOutput) => {
         this._azureStorageService.uploadFile(this.resources.image).then(response => {
           new URL(response);
-          this.resources.imageUrl = response;
           this.resources.name = this.model.name
           this.resources.email = this.model.emailAddress;
           this.resources.surname = this.model.surname;
@@ -93,7 +91,7 @@ export class CreateResourcesHumansComponent extends AppComponentBase implements 
           modelresources.departamentId = forms.departamentId;
           modelresources.dateOfBirth = forms.dateOfBirth;
           modelresources.isActive = forms.isActive;
-
+          modelresources.imagesUrl = response;
           this._employeeService.create(modelresources).subscribe((resourcesDto: EmployeeDto) => {
             this._employeeService.addUser(new CreateEmployeeUserDto({
               employeeId: resourcesDto.id,
@@ -105,10 +103,5 @@ export class CreateResourcesHumansComponent extends AppComponentBase implements 
           });
         });
       });
-  }
-
-  teste () {
-    console.log(this.firstFormGroup.value.dateOfBirth);
-    
   }
 }

@@ -17,7 +17,7 @@ export interface IEmployeeDto {
     numberOfHouse: string;
     complement: string;
     isActive: boolean;
-    imageUrl: string;
+    imagesUrl: string;
     image: File;
     truckId?: string;
     truck: TruckDto;
@@ -49,7 +49,7 @@ export class EmployeeDto implements IEmployeeDto {
     numberOfHouse: string;
     complement: string;
     isActive: boolean;
-    imageUrl: string;
+    imagesUrl: string;
     image: File;
     truckId: string;
     truck: TruckDto;
@@ -82,7 +82,7 @@ export class EmployeeDto implements IEmployeeDto {
             this.complement = data.complement;
             this.street = data.street;
             this.isActive = data.isActive;
-            this.imageUrl = data.imageUrl;
+            this.imagesUrl = data.imagesUrl;
             this.image = data.image;
             this.truckId = data.truckId;
             this.truck = data.truck;
@@ -107,7 +107,7 @@ export class EmployeeDto implements IEmployeeDto {
         data.complement = this.complement;
         data.street = this.street;
         data.isActive = this.isActive;
-        data.imageUrl = this.imageUrl;
+        data.imagesUrl = this.imagesUrl;
         data.image = this.image;
         data.truckId = this.truckId;
         data.truck = this.truck;

@@ -64,6 +64,7 @@ import { CreateResourcesHumansComponent } from './resources-humans/create-resour
 import { MatTableModule } from '@angular/material/table';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { InfoResourcesHumansComponent } from './resources-humans/info-resources-humans/info-resources-humans.component';
 export const options: Partial<null | IConfig> | (() => Partial<IConfig>) = null;
 
 @NgModule({
@@ -99,7 +100,8 @@ export const options: Partial<null | IConfig> | (() => Partial<IConfig>) = null;
     ResourcesHumansComponent,
     DriverComponent,
     EmployeeComponent,
-    CreateResourcesHumansComponent
+    CreateResourcesHumansComponent,
+    InfoResourcesHumansComponent
   ],
   imports: [
     CommonModule,
