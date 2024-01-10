@@ -25,8 +25,8 @@ Antes de começar, verifique se você atende aos seguintes requisitos:
 
 1. Faça o download do projeto para sua máquina.
 2. Abra a solução localizada na pasta "aspnet-full" usando o Visual Studio.
-3. No arquivo `appsettings.json` dentro do projeto "Henrique.Unisolution.Web.Host", ajuste a string de conexão do banco de dados conforme necessário.
-4. No Package Manager Console, selecione o projeto padrão como "src\Henrique.Unisolution.EntityFrameworkCore".
+3. No arquivo `appsettings.json` dentro do projeto "AspNetCrud.Web.Host", ajuste a string de conexão do banco de dados conforme necessário.
+4. No Package Manager Console, selecione o projeto padrão como "src\AspNetCrud.EntityFrameworkCore".
 5. Execute o comando `Update-Database` para criar o banco de dados com base nas configurações.
 6. Após a criação bem-sucedida do banco de dados, inicie o projeto para lançar a aplicação.
 
