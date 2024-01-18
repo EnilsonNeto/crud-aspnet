@@ -79,7 +79,7 @@
                             <mat-label>{{resources.dateOfBirth ? resources.dateOfBirth : 'Data de
                                 Nascimento'}}</mat-label>
                             <input matInput [matDatepicker]="picker" (click)="picker.open()"
-                                formControlName="dateOfBirth">
+                                formControlName="dateOfBirth" >
                             <mat-datepicker #picker></mat-datepicker>
                         </mat-form-field>
                     </div>
@@ -107,7 +107,7 @@
                         </mat-form-field>
                         <mat-form-field appearance="outline" class="Input">
                             <mat-label>CEP</mat-label>
-                            <input class="input-place" matInput name="cep" mask="00000-000" mask="00000-000"
+                            <input class="input-place" matInput name="cep" mask="00000-000"
                                 [(ngModel)]="resources.cep" required maxlength="36" formControlName="cep" />
                         </mat-form-field>
                         <mat-form-field appearance="outline" class="Input">
